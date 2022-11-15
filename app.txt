@@ -1,0 +1,174 @@
+const express = require("express");
+
+
+// init app
+const app = express();
+
+const books = [
+    {
+        id: 1,
+        title: "funny",
+        author: "me"
+    },
+  
+    {
+        id: 2,
+        title: "funny",
+        author: "me"
+    },
+]
+
+// app.post();
+// app.put();
+// app.delete();
+
+// takes two argument, url and callback function
+app.get("/" , (reg, res) => {
+    res.send("Hello, welcome to express js");
+});
+
+
+
+
+// Running the server
+
+const PORT = 5000;
+app.listen(PORT, () => 
+console.log(`Server is running on port ${PORT}`));
+
+
+
+
+
+router.post('/', async (req, res) => {
+     
+      const { error } = validateCreateAuthor(req.body)
+  
+    if(error) {
+      return res.status(400).json({ message: error.details[0].message }) // error
+    }
+  
+    try {
+      const author = new Author ({
+        fullName: req.body.fullName,
+        nationality: req.body.nationality,
+        image: req.body.image
+      })
+      
+     const result = await author.save()
+      res.status(201).json(result)
+    
+    }
+     catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'something went wrong'})
+    }
+
+
+
+
+
+
+
+    router.post('/', async (req, res) => {
+    const { error } = validateCreateAuthor(req.body)
+
+    if(error) {
+      return res.status(400).json({ message: error.details[0].message }) // error
+    }
+    try {
+      const author = new Author ({
+        fullName: req.body.fullName,
+        nationality: req.body.nationality,
+        image: req.body.image
+      })
+      
+     const result = await author.save()
+      res.status(201).json(result)
+    
+    }
+     catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'something went wrong'})
+    }
+  })
+  
+  router.put('/:id', (req, res) => {
+    const { error } = validateUpdateAuthor(req.body)
+  
+    if(error) {
+      return res.status(400).json({ message: error.details[0].message }) // error
+    }
+      const author = authors.find(b => b.id === parseInt(req.params.id))
+  
+      if(author) {
+        res.status(200).json({ message: 'author has been update' })
+      } else { 
+        res.status(404).json({ message: 'author not found' })
+      }
+  
+  })
+  
+  router.delete('/:id', (req, res) => {
+      const author = authors.find(b => b.id === parseInt(req.params.id))
+  
+      if(author) {
+        res.status(200).json({ message: 'author has been delete' })
+      } else { 
+        res.status(404).json({ message: 'author not found' })
+      }
+  
+  })
+  
+  function validateCreateAuthor(obj) {
+    const schema = joi.object({
+      fullName: joi.string().trim().min(3).max(34).required(),
+      nationality: joi.string().trim().min(3).max(34).required(),
+      image: joi.string().trim().min(3).max(34).required(),
+  });
+  
+  return schema.validate(obj)
+  }
+  
+  
+  function validateUpdateAuthor(obj) {
+    const schema = joi.object({
+        fullName: joi.string().trim().min(3).max(34),
+        nationality: joi.string().trim().min(3).max(34),
+        image: joi.string().trim().min(3).max(34),
+  });
+  
+  return schema.validate(obj)
+  }
+
+
+
+  mongoose
+    .connect('mongodb://localhost/bookStoreDB')
+    .then(() => console.log('connected to MongoDB'))
+    .catch((error) => console.log('connected failed', error))
+
+
+
+
+
+router.delete('/:id', async (req, res) => {
+    try {
+      const author = await Author.findByIdAnd(req.params.id))
+
+    if(author) {
+      const author = await Author.findByIdAndDelete()
+      res.status(200).json({ message: 'author has been delete' })
+    } else { 
+      res.status(404).json({ message: 'author not found' })
+    }
+     catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'something went wrong'})
+    })
+
+
+
+    MONGO_URI=mongodb://localhost/bookStoreDB
+PORT=3000
+NODE_ENV=development
